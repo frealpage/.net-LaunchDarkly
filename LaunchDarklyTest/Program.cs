@@ -7,26 +7,27 @@ namespace LaunchDarklyTest
     {
         static void Main(string[] args)
         {
-            LdClient client = new LdClient("sdk-971d4780-5c94-4f75-a3ee-e2f2d6876032");
-            User user = User.Builder("UNIQUE IDENTIFIER")
+            LdClient client = new LdClient("sdk-654e6002-b3bb-416f-a4a4-da02032e068f");
+            //Console.WriteLine(typeof(LdClient).FullName);
+            User user = User.Builder("20")
               .FirstName("Bob")
               .LastName("Loblaw")
-              .Country("US")
+              .Country("JAP")
               .Custom("State","NY")
-              .Custom("Site", "1")
+              .Custom("Site", "1000")
               .Build();
 
-            bool pilotflag = client.BoolVariation("pilot", user, false);
+            bool pilotflag = client.BoolVariation("msb-idv-pilot", user, false);
             if (pilotflag)
             {
-                Console.WriteLine("Pilot Flag for Site 4 is true");
+                Console.WriteLine("Pilot Flag for Site is true");
             }
             else
             {
-                Console.WriteLine("Pilot Flag for Site 4 is false");
+                Console.WriteLine("Pilot Flag for Site is false");
             }
-
-            string countrieflag = client.StringVariation("countries", user, "flase");
+            
+            string countrieflag = client.StringVariation("msb-idv-country", user, "flase");
             if (countrieflag=="true" || countrieflag == "US")
             {
                 Console.WriteLine("Countries Flag for country Us is true");
@@ -36,7 +37,7 @@ namespace LaunchDarklyTest
                 Console.WriteLine("Countries Flag for country Us is false");
             }
 
-            bool Stateflag = client.BoolVariation("states", user, false);
+            bool Stateflag = client.BoolVariation("msb-idv-states", user, false);
             
             if (Stateflag)
             {
@@ -47,7 +48,7 @@ namespace LaunchDarklyTest
                 Console.WriteLine("State Flag for state NY is false");
             }
 
-
+            
             client.Flush();
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();
